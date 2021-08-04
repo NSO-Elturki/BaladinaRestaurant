@@ -1,0 +1,25 @@
+version: '3.4'
+
+services:
+  restaurantapiproject:
+    image: ${DOCKER_REGISTRY-}restaurantapiproject
+    build:
+      context: .
+      dockerfile: RestaurantApiProject/Dockerfile
+    depends_on:
+      - resturantDb
+  resturantDb:
+    image: mcr.microsoft.com/mssql/server:2017-latest
+    environment:
+      ACCEPT_EULA: "Y"
+      SA_PASSWORD: "NagiElturki@Libya"
+    volumes:
+      - resturant_data:/var/opt/mssql
+    
+    ports:
+      - "2020:1433"
+
+
+volumes:
+  resturant_data:
+    external: true
