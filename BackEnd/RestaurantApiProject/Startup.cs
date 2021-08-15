@@ -46,8 +46,11 @@ namespace RestaurantApiProject
 
               services.AddScoped<FoodRepository>();
               services.AddScoped<DrinksRepository>();
-              services.AddScoped<OrderRepository>();
               services.AddScoped<UserRepository>();
+              services.AddScoped<OrderFoodRepository>();
+              services.AddScoped<OrderDrinksRepository>();
+              services.AddScoped<OrdersBillsRepository>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -8,13 +8,12 @@ using System.Collections.Generic;
 
 namespace RestaurantApiProject.Models
 {
-    public partial class Orders: IEntity
+    public partial class OrdersFood: IEntity
     {
         public int Id { get; set; }
-        public string OrderDescription { get; set; }
-        public int DeliveryPhoneNumber { get; set; }
-        public string DeliveryAddress { get; set; }
-        public DateTime CreateTime { get; set; }
-        public string OrderNote { get; set; }
+        public int OrderId { get; set; }
+        public int FoodId { get; set; }
+
+        public virtual Food Food { get; set; }
     }
 }
