@@ -10,6 +10,11 @@ namespace RestaurantApiProject.Models
 {
     public partial class Users: IEntity
     {
+        public Users()
+        {
+            OrdersBills = new HashSet<OrdersBills>();
+        }
+
         public int Id { get; set; }
         public string FullName { get; set; }
         public string Email { get; set; }
@@ -17,5 +22,7 @@ namespace RestaurantApiProject.Models
         public int PhoneNumber { get; set; }
         public int UserType { get; set; }
         public DateTime CreateDate { get; set; }
+
+        public virtual ICollection<OrdersBills> OrdersBills { get; set; }
     }
 }

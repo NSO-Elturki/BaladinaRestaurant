@@ -8,8 +8,13 @@ using System.Collections.Generic;
 
 namespace RestaurantApiProject.Models
 {
-    public partial class Drinks: IEntity
+    public partial class Drinks:IEntity
     {
+        public Drinks()
+        {
+            OrdersDrinks = new HashSet<OrdersDrinks>();
+        }
+
         public int Id { get; set; }
         public string DrinkType { get; set; }
         public string DrinkName { get; set; }
@@ -17,5 +22,7 @@ namespace RestaurantApiProject.Models
         public int Quantity { get; set; }
         public string DrinkDescription { get; set; }
         public DateTime CreateDate { get; set; }
+
+        public virtual ICollection<OrdersDrinks> OrdersDrinks { get; set; }
     }
 }

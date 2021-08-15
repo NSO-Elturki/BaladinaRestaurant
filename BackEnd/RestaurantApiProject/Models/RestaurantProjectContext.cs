@@ -19,89 +19,46 @@ namespace RestaurantApiProject.Models
 
         public virtual DbSet<Drinks> Drinks { get; set; }
         public virtual DbSet<Food> Food { get; set; }
-        public virtual DbSet<Orders> Orders { get; set; }
+        public virtual DbSet<OrdersBills> OrdersBills { get; set; }
+        public virtual DbSet<OrdersDrinks> OrdersDrinks { get; set; }
+        public virtual DbSet<OrdersFood> OrdersFood { get; set; }
         public virtual DbSet<Users> Users { get; set; }
 
        
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Drinks>(entity =>
             {
-                entity.HasKey(e => e.Id)
-                    .HasName("PK__Drinks__C094D3E8A5C6694D");
-
-                entity.Property(e => e.CreateDate)
-                    .HasColumnType("datetime")
-                    .HasDefaultValueSql("(getdate())");
-
-                entity.Property(e => e.DrinkDescription)
-                    .HasMaxLength(500)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.DrinkName)
-                    .IsRequired()
-                    .HasMaxLength(10)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.DrinkPrice).HasColumnType("decimal(18, 0)");
-
-                entity.Property(e => e.DrinkType)
-                    .IsRequired()
-                    .HasMaxLength(10)
-                    .IsUnicode(false);
+                entity.Property(e => e.DrinkPrice).HasColumnType("decimal(18, 2)");
             });
 
             modelBuilder.Entity<Food>(entity =>
             {
-                entity.Property(e => e.CreateDate)
-                    .HasColumnType("datetime")
-                    .HasDefaultValueSql("(getdate())");
+                entity.Property(e => e.FoodPrice).HasColumnType("decimal(18, 2)");
+            });
 
-                entity.Property(e => e.FoodDescription)
-                    .IsRequired()
-                    .HasMaxLength(500)
-                    .IsUnicode(false);
+            modelBuilder.Entity<OrdersBills>(entity =>
+            {
+                entity.ToTable("Orders_Bills");
 
-                entity.Property(e => e.FoodName)
-                    .IsRequired()
-                    .HasMaxLength(100)
-                    .IsUnicode(false);
+                entity.HasIndex(e => e.OrderId)
+                    .HasName("UQ__Orders_B__C3905BCE2833B110")
+                    .IsUnique();
 
-                entity.Property(e => e.FoodPrice).HasColumnType("decimal(18, 0)");
-
-                entity.Property(e => e.FoodType)
+                entity.Property(e => e.City)
                     .IsRequired()
                     .HasMaxLength(50)
                     .IsUnicode(false);
-            });
 
-            modelBuilder.Entity<Orders>(entity =>
-            {
-                entity.HasKey(e => e.Id)
-                    .HasName("PK__Orders__C3905BCFC7645D3F");
-
-                entity.Property(e => e.CreateTime)
-                    .HasColumnType("datetime")
-                    .HasDefaultValueSql("(getdate())");
-
-                entity.Property(e => e.DeliveryAddress)
-                    .HasMaxLength(500)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.OrderDescription)
-                    .IsRequired()
+                entity.Property(e => e.ClientAddress)
                     .HasMaxLength(1000)
                     .IsUnicode(false);
 
-                entity.Property(e => e.OrderNote)
+                entity.Property(e => e.ClientName)
+                    .IsRequired()
                     .HasMaxLength(500)
                     .IsUnicode(false);
-            });
-
-            modelBuilder.Entity<Users>(entity =>
-            {
-                entity.HasKey(e => e.Id)
-                    .HasName("PK__Users__1788CC4C1BD3796C");
 
                 entity.Property(e => e.CreateDate)
                     .HasColumnType("datetime")
@@ -112,15 +69,38 @@ namespace RestaurantApiProject.Models
                     .HasMaxLength(300)
                     .IsUnicode(false);
 
-                entity.Property(e => e.FullName)
-                    .IsRequired()
-                    .HasMaxLength(300)
+                entity.Property(e => e.Note)
+                    .HasMaxLength(500)
                     .IsUnicode(false);
 
-                entity.Property(e => e.Password)
-                    .IsRequired()
-                    .HasMaxLength(1000)
-                    .IsUnicode(false);
+                entity.Property(e => e.TotalCost).HasColumnType("decimal(18, 0)");
+
+                entity.HasOne(d => d.Client)
+                    .WithMany(p => p.OrdersBills)
+                    .HasForeignKey(d => d.ClientId)
+                    .HasConstraintName("FK__Orders_Bi__Clien__68D28DBC");
+            });
+
+            modelBuilder.Entity<OrdersDrinks>(entity =>
+            {
+                entity.ToTable("Orders_Drinks");
+
+                entity.HasOne(d => d.Drink)
+                    .WithMany(p => p.OrdersDrinks)
+                    .HasForeignKey(d => d.DrinkId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__Orders_Dr__Drink__55BFB948");
+            });
+
+            modelBuilder.Entity<OrdersFood>(entity =>
+            {
+                entity.ToTable("Orders_Food");
+
+                entity.HasOne(d => d.Food)
+                    .WithMany(p => p.OrdersFood)
+                    .HasForeignKey(d => d.FoodId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__Orders_Fo__FoodI__42ACE4D4");
             });
 
             OnModelCreatingPartial(modelBuilder);

@@ -22,7 +22,6 @@ namespace RestaurantApiProject.Controllers
         public async Task<ActionResult> GetAll()
         {
             return Ok(await this.repository.getAll());
-
         }
 
         [HttpGet("{id}")]
@@ -63,9 +62,7 @@ namespace RestaurantApiProject.Controllers
             }
 
             return Ok();
-
         }
-
 
         [HttpPost]
         public virtual async Task<ActionResult<T>> Post(T obj)
@@ -85,7 +82,6 @@ namespace RestaurantApiProject.Controllers
             return CreatedAtAction(nameof(GetById), new { id = obj.Id }, obj);
         }
 
-
         [HttpDelete("{id}")]
         public virtual async Task<IActionResult> Delete(int id)
         {
@@ -103,8 +99,5 @@ namespace RestaurantApiProject.Controllers
 
             return Ok();
         }
-
-
-       
     }
 }
