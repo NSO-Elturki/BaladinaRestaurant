@@ -1,0 +1,33 @@
+services:
+  restaurantapiproject:
+    build:
+      context: C:\Users\nagif\Desktop\Baladina_GitHub_Repo\BaladinaRestaurant\BackEnd
+      dockerfile: RestaurantApiProject/Dockerfile
+    depends_on:
+      resturantDb:
+        condition: service_started
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: https://+:443;http://+:80
+    image: restaurantapiproject
+    ports:
+    - target: 80
+    - target: 443
+    volumes:
+    - C:\Users\nagif\AppData\Roaming\ASP.NET\Https:/root/.aspnet/https:ro
+    - C:\Users\nagif\AppData\Roaming\Microsoft\UserSecrets:/root/.microsoft/usersecrets:ro
+  resturantDb:
+    environment:
+      ACCEPT_EULA: "Y"
+      SA_PASSWORD: NagiElturki@Libya
+    image: mcr.microsoft.com/mssql/server:2017-latest
+    ports:
+    - published: 2020
+      target: 1433
+    volumes:
+    - resturant_data:/var/opt/mssql:rw
+version: '3.4'
+volumes:
+  resturant_data:
+    external: true
+    name: resturant_data
