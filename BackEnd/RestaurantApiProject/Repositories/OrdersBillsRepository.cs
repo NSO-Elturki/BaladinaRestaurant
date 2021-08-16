@@ -14,5 +14,6 @@ namespace RestaurantApiProject.Repositories
            : base(restaurantProjectContext)
         {
         }
+
     }
 }

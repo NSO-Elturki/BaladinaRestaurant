@@ -2,7 +2,7 @@
 namespace RestaurantApiProject.Contracts
 
 {
-    public interface IOrderDrinkRepository : IBaseRepository<OrdersDrinks>
+    public interface IOrderDrinkRepository : IBaseOrderRepository<OrdersDrinks>
     {
     }
 }
