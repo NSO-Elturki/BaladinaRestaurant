@@ -21,7 +21,6 @@ namespace RestaurantApiProject.Models
         public string Note { get; set; }
         public DateTime CreateDate { get; set; }
         public decimal TotalCost { get; set; }
-        public int ToPickUp { get; set; }
 
         public virtual Users Client { get; set; }
     }

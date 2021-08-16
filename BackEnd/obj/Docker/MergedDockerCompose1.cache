@@ -1,0 +1,53 @@
+services:
+  restaurantapiproject:
+    build:
+      context: C:\Users\nagif\Desktop\Baladina_GitHub_Repo\BaladinaRestaurant\BackEnd
+      dockerfile: RestaurantApiProject/Dockerfile
+      labels:
+        com.microsoft.created-by: visual-studio
+        com.microsoft.visual-studio.project-name: RestaurantApiProject
+      target: base
+    container_name: RestaurantApiProject
+    depends_on:
+      resturantDb:
+        condition: service_started
+    entrypoint: tail -f /dev/null
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_LOGGING__CONSOLE__DISABLECOLORS: "true"
+      ASPNETCORE_URLS: https://+:443;http://+:80
+      DOTNET_USE_POLLING_FILE_WATCHER: '1'
+      NUGET_FALLBACK_PACKAGES: ''
+    image: restaurantapiproject:dev
+    labels:
+      com.microsoft.visualstudio.debuggee.arguments: ' --additionalProbingPath /root/.nuget/packages  "/app/bin/Debug/netcoreapp3.1/RestaurantApiProject.dll"'
+      com.microsoft.visualstudio.debuggee.killprogram: /bin/sh -c "if PID=$$(pidof
+        dotnet); then kill $$PID; fi"
+      com.microsoft.visualstudio.debuggee.program: dotnet
+      com.microsoft.visualstudio.debuggee.workingdirectory: /app
+    ports:
+    - target: 80
+    - target: 443
+    tty: true
+    volumes:
+    - C:\Users\nagif\Desktop\Baladina_GitHub_Repo\BaladinaRestaurant\BackEnd\RestaurantApiProject:/app:rw
+    - C:\Users\nagif\vsdbg\vs2017u5:/remote_debugger:rw
+    - C:\Users\nagif\AppData\Roaming\ASP.NET\Https:/root/.aspnet/https:ro
+    - C:\Users\nagif\AppData\Roaming\Microsoft\UserSecrets:/root/.microsoft/usersecrets:ro
+    - C:\Users\nagif\.nuget\packages:/root/.nuget/packages:ro
+    - C:\Users\nagif\Desktop\Baladina_GitHub_Repo\BaladinaRestaurant\BackEnd:/src:rw
+  resturantDb:
+    environment:
+      ACCEPT_EULA: "Y"
+      SA_PASSWORD: NagiElturki@Libya
+    image: mcr.microsoft.com/mssql/server:2017-latest
+    ports:
+    - published: 2020
+      target: 1433
+    volumes:
+    - resturant_data:/var/opt/mssql:rw
+version: '3.4'
+volumes:
+  resturant_data:
+    external: true
+    name: resturant_data
