@@ -1,14 +1,14 @@
 ﻿using RestaurantApiProject.Contracts;
 using RestaurantApiProject.Models;
-using RestaurantApiProject.Services;
 
 namespace RestaurantApiProject.Repositories
 {
-    public class OrderDrinksRepository : BaseRepository<OrdersDrinks>, IOrderDrinkRepository
+    public class OrderDrinksRepository : BaseOrderRepository<OrdersDrinks>, IOrderDrinkRepository
     {
         public OrderDrinksRepository(RestaurantProjectContext restaurantProjectContext)
-            : base(restaurantProjectContext)
+           : base(restaurantProjectContext)
         {
         }
+
     }
 }
