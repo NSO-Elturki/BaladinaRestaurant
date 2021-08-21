@@ -28,8 +28,8 @@ namespace Restaurant.Test
 
             listOfOrdersBills = new List<OrdersBills>
             {
-                new OrdersBills { Id = 1, ClientName = "Nagi Elturki", ClientAddress = "Tue La Luna",  ClientPhoneNumber = 1234567, Email = "nagielturki@gmail.com", City = "Eindhoven", Note = "Please ring bill 1234", OrderId = 1, ToPickUp = 0, TotalCost = 20, CreateDate = DateTime.Now },
-                new OrdersBills { Id = 1, ClientName = "Redwan Elturki", ClientAddress = "Vactorai park",  ClientPhoneNumber = 1234567, Email = "redwanelturki@gmail.com", City = "Eindhoven", Note = "Please ring bill 333", OrderId = 1, ToPickUp = 0, TotalCost = 25, CreateDate = DateTime.Now },
+                new OrdersBills { Id = 1, ClientName = "Nagi Elturki", ClientAddress = "Tue La Luna",  ClientPhoneNumber = 1234567, Email = "nagielturki@gmail.com", City = "Eindhoven", Note = "Please ring bill 1234", OrderId = 1, TotalCost = 20, CreateDate = DateTime.Now },
+                new OrdersBills { Id = 1, ClientName = "Redwan Elturki", ClientAddress = "Vactorai park",  ClientPhoneNumber = 1234567, Email = "redwanelturki@gmail.com", City = "Eindhoven", Note = "Please ring bill 333", OrderId = 1, TotalCost = 25, CreateDate = DateTime.Now },
             };
 
             context.OrdersBills.AddRange(listOfOrdersBills);
