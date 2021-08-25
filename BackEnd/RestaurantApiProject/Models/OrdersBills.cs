@@ -8,7 +8,7 @@ using System.Collections.Generic;
 
 namespace RestaurantApiProject.Models
 {
-    public partial class OrdersBills: IEntity
+    public partial class OrdersBills:IEntity
     {
         public int Id { get; set; }
         public int OrderId { get; set; }
@@ -21,7 +21,6 @@ namespace RestaurantApiProject.Models
         public string Note { get; set; }
         public DateTime CreateDate { get; set; }
         public decimal TotalCost { get; set; }
-        public int ToPickUp { get; set; }
 
         public virtual Users Client { get; set; }
     }

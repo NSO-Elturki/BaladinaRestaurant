@@ -14,7 +14,7 @@ namespace RestaurantApiProject.Controllers
         {
         }
 
-       [Authorize]
+   //    [Authorize]
         public override async Task<ActionResult<Drinks>> Post(Drinks drink)
         {
             if (drink == null || drink.DrinkPrice <= 0 || drink.DrinkType == null || drink.Quantity <= 0 || drink.DrinkName == null)
@@ -25,13 +25,13 @@ namespace RestaurantApiProject.Controllers
             return await base.Post(drink);
         }
 
-      [Authorize]
+    //  [Authorize]
         public override async Task<IActionResult> Put(int id, Drinks drink)
         {
             return await base.Put(id, drink);
         }
 
-       [Authorize]
+     //  [Authorize]
         public override async Task<IActionResult> Delete(int id)
         {
             return await base.Delete(id);

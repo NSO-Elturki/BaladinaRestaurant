@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using RestaurantApiProject.Contracts;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace RestaurantApiProject.Controllers
@@ -24,17 +25,19 @@ namespace RestaurantApiProject.Controllers
         }
 
         [HttpPost]
-        public virtual async Task<IActionResult> Post(T obj)
+        //public virtual async Task<IActionResult> Post(T obj)
+        public virtual async Task<IActionResult> Post(List<T> obj)
+
         {
             if (obj == null)
             {
                 return BadRequest();
             }
 
-            if (repository.isExists(obj.Id) == true)
-            {
-                return BadRequest();
-            }
+            //if (repository.isExists(obj.Id) == true)
+            //{
+            //    return BadRequest();
+            //}
 
             await repository.create(obj);
             return Ok();

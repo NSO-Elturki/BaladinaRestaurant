@@ -17,11 +17,13 @@ namespace RestaurantApiProject.Repositories
         {
             this.context = context;
         }
-        public async Task create(T order)
+        // public async Task create(T order)
+        public virtual async Task create(List<T> orders)
         {
             try
             {
-                context.Set<T>().Add(order);
+                // context.Set<T>().Add(order);
+                context.Set<T>().AddRange(orders);
                 await context.SaveChangesAsync();
             }
             catch (Exception e)

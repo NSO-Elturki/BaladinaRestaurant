@@ -8,6 +8,7 @@ services:
       dockerfile: RestaurantApiProject/Dockerfile
     depends_on:
       - resturantDb
+
   resturantDb:
     image: mcr.microsoft.com/mssql/server:2017-latest
     environment:

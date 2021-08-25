@@ -10,6 +10,7 @@ using RestaurantApiProject.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using RestaurantApiProject.Contracts;
 
 namespace RestaurantApiProject
 {
@@ -49,7 +50,8 @@ namespace RestaurantApiProject
               services.AddScoped<UserRepository>();
               services.AddScoped<OrderFoodRepository>();
               services.AddScoped<OrderDrinksRepository>();
-              services.AddScoped<OrdersBillsRepository>();
+              services.AddScoped<IOrderBillRepository,OrdersBillsRepository>();
+
 
         }
 

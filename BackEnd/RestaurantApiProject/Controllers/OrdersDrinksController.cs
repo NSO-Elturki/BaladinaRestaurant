@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using RestaurantApiProject.Models;
 using RestaurantApiProject.Repositories;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace RestaurantApiProject.Controllers
@@ -13,12 +14,12 @@ namespace RestaurantApiProject.Controllers
         {
         }
 
-        public override async Task<IActionResult> Post(OrdersDrinks ordersDrinks)
+        public override async Task<IActionResult> Post(List<OrdersDrinks> ordersDrinks)
         {
-            if (ordersDrinks == null || ordersDrinks.DrinkId <= 0)
-            {
-                return BadRequest();
-            }
+            //if (ordersDrinks == null || ordersDrinks.DrinkId <= 0)
+            //{
+            //    return BadRequest();
+            //}
 
             return await base.Post(ordersDrinks);
         }
