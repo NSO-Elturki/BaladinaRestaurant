@@ -20,14 +20,29 @@ class OrderRepository {
     print('ORDERID IS $orderId');
   }
 
+  addToBasket(String name, double price) {
+    bool isExsist = false;
+    for (var i in selectedItems) {
+      if (i.name == name) {
+        i.quantity += 1;
+        i.price += price;
+        isExsist = true;
+        break;
+      }
+    }
+    if (!isExsist) {
+      this.selectedItems.add(new SelectedItem(name, price, 1));
+    }
+  }
+
   addFoodToOrder(Food food) {
-    this.selectedItems.add(new SelectedItem(food.foodName, food.foodPrice));
+    this.addToBasket(food.foodName, food.foodPrice);
     this.foodOrderList.add(new FoodOrder(this.orderId, food.id));
     this.totalCost += food.foodPrice;
   }
 
   addDrinkToOrder(Drink drink) {
-    this.selectedItems.add(new SelectedItem(drink.drinkName, drink.drinkPrice));
+    this.addToBasket(drink.drinkName, drink.drinkPrice);
     this.drinksOrderList.add(new DrinksOrder(this.orderId, drink.id));
 
     this.totalCost += drink.drinkPrice;

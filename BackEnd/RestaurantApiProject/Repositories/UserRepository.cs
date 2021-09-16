@@ -78,16 +78,35 @@ namespace RestaurantApiProject.Services
         /// that user need for some features in the application. In case the user email or password are wrong 
         /// then the method will return null
         /// </returns>
-        public virtual string login(string email, string password)
+        //public virtual string login(string email, string password)
+        //{
+        //    try
+        //    {
+        //            var loginUser = getUser(email);
+
+        //            if (loginUser != null && BC.Verify(password, loginUser.Password))
+        //            {
+        //                return this.generateLoginToken();
+        //            }
+
+        //        return null;
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        throw new Exception(e.ToString());
+        //    }
+        //}
+
+        public virtual TokenClass login(string email, string password)
         {
             try
             {
-                    var loginUser = getUser(email);
+                var loginUser = getUser(email);
 
-                    if (loginUser != null && BC.Verify(password, loginUser.Password))
-                    {
-                        return this.generateLoginToken();
-                    }
+                if (loginUser != null && BC.Verify(password, loginUser.Password))
+                {
+                    return new TokenClass() { Token= this.generateLoginToken(), CreateDate= DateTime.Now};
+                }
 
                 return null;
             }

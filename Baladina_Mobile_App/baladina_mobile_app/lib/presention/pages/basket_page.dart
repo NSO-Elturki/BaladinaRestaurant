@@ -27,9 +27,18 @@ class _BasketPageState extends State<BasketPage> {
                     itemCount: state.selectedItems.length,
                     itemBuilder: (context, index) {
                       final item = state.selectedItems[index];
-                      return ListTile(
-                        title: Text(item.name),
-                        trailing: Text('${item.price.toString()}'),
+                      return Column(
+                        children: [
+                          ListTile(
+                            leading: Text(item.quantity.toString()),
+                            title: Text(item.name),
+                            trailing: Text('${item.price.toString()}'),
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [],
+                          )
+                        ],
                       );
                     },
                   ),

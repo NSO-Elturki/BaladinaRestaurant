@@ -4,7 +4,7 @@ namespace RestaurantApiProject.Contracts
 {
     public interface IUserRepository : IBaseRepository<Users>
     {
-        string login(string email, string password);
+        TokenClass login(string email, string password);
         string generateLoginToken();
     }
 }
