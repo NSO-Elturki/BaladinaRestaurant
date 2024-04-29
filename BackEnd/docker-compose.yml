@@ -13,7 +13,7 @@ services:
     image: mcr.microsoft.com/mssql/server:2017-latest
     environment:
       ACCEPT_EULA: "Y"
-      SA_PASSWORD: "NagiElturki@Libya"
+      SA_PASSWORD: "xxx"
     volumes:
       - resturant_data:/var/opt/mssql
     
